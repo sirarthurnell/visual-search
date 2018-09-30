@@ -6,18 +6,20 @@ import { Image, Size } from '../models/image';
  */
 export class ImagesService {
   _url =
-    "http://api.flickr.com/services/feeds/photos_public.gne?tags=city&tagmode=any&format=json";
+    "http://api.flickr.com/services/feeds/photos_public.gne?tags=topic&tagmode=any&format=json";
 
   constructor() {}
 
-  getImages(cityName = "Kaohsiung") {
-    const cityUrl = this._url.replace("city", cityName);
+  /**
+   * Gets images about a specified topic.
+   * @param {string} topic Topic
+   */
+  getImages(topic = "Kaohsiung") {
+    const topicUrl = this._url.replace("topic", topic);
     const jsonpOptions = {
       jsonp: 'jsoncallback'
     }
 
-    Vue.http.jsonp(cityUrl, jsonpOptions).then(
-      res => console.log(res)
-    );
+    return Vue.http.jsonp(topicUrl, jsonpOptions);
   }
 }
