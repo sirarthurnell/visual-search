@@ -13,8 +13,7 @@
                 @sliding-end="onSlideEnd"
     >
 
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58">
-      </b-carousel-slide>
+      <b-carousel-slide v-for="(url, index) in imageUrls" :img-src="url" :key="index"/>
 
     </b-carousel>
 
@@ -30,11 +29,13 @@
 import { ImagesService } from '../services/images.service.js';
 
 export default {
+  props: {
+    topic: String
+  },
   data() {
     return {
       slide: 0,
       sliding: null,
-      topic_: '',
       imageUrls: []
     };
   },
@@ -47,19 +48,15 @@ export default {
     },
     updateImages() {
       const images = new ImagesService();
-      images.getImages(this.topic_).then(rawImages => console.log(rawImages));
+      images.getImages(this.topic_).then(rawImages => {
+        const urls = rawImages.body.items.map(item => item.media.m);
+        this.imageUrls = urls;
+      });
     }
   },
-  computed: {
-    topic: {
-      get: function() {
-        return this.topic_;
-      },
-      set: function(topic) {
-        console.log(topic);
-        this.topic_ = topic;
+  watch: {
+    topic: function(newTopic, oldTopic) {
         this.updateImages();
-      }
     }
   }
 };
