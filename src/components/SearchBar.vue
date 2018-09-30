@@ -1,6 +1,6 @@
 <template>
 
-<b-input-group size="lg" append="search" class="search-bar">
+<b-input-group size="lg" append="search" class="search-bar" @keyup.enter="searchRequested($event)">
   <b-form-input></b-form-input>
 </b-input-group>
 
@@ -10,8 +10,11 @@
 
 export default {
   name: "SearchBar",
-  props: {
-    msg: String
+  methods: {
+    searchRequested(event) {
+      const topic = event.target.value;
+      this.$emit('searchRequested', topic);
+    }
   }
 };
 

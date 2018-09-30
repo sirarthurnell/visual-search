@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <SearchBar />
-    <Info topic="hello" />
-    <Images />
+    <SearchBar @searchRequested="onSearchRequested($event)" />
+    <Info :topic="topic" />
+    <Images :topic="topic" />
   </div>
 </template>
 
@@ -17,6 +17,16 @@ export default {
     SearchBar,
     Info,
     Images
+  },
+  data() {
+    return {
+      topic: ''
+    };
+  },
+  methods: {
+    onSearchRequested(topic) {
+      this.topic = topic;
+    }
   }
 }
 </script>
