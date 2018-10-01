@@ -1,13 +1,8 @@
 <template>
-  <div>
-    <b-carousel id="carousel1"
-                style="text-shadow: 1px 1px 2px #333;"
-                controls
+  <div class="images">
+    <b-carousel controls
                 indicators
-                background="#ababab"
                 :interval="4000"
-                img-width="1024"
-                img-height="480"
                 v-model="slide"
                 @sliding-start="onSlideStart"
                 @sliding-end="onSlideEnd"
@@ -16,11 +11,6 @@
       <b-carousel-slide v-for="(url, index) in imageUrls" :img-src="url" :key="index"/>
 
     </b-carousel>
-
-    <p class="mt-4">
-      Slide #: {{ slide }}<br>
-      Sliding: {{ sliding }}
-    </p>
 
   </div>
 </template>
@@ -48,8 +38,9 @@ export default {
     },
     updateImages() {
       const images = new ImagesService();
-      images.getImages(this.topic_).then(rawImages => {
-        const urls = rawImages.body.items.map(item => item.media.m);
+      images.getImages(this.topic).then(rawImages => {
+        console.log(rawImages);
+        const urls = rawImages.body.items.map(item => item.media.m.replace('_m.', '_c.'));
         this.imageUrls = urls;
       });
     }
@@ -62,5 +53,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.images {
+  border-radius: 2rem;
+  overflow: hidden;
+  outline: none;
+}
 </style>

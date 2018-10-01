@@ -1,6 +1,6 @@
 <template>
 
-<b-input-group size="lg" append="search" class="search-bar" @keyup.enter="searchRequested($event)">
+<b-input-group size="lg" append="[enter]" class="search-bar" @keyup.enter="searchRequested($event)">
   <b-form-input></b-form-input>
 </b-input-group>
 
@@ -21,11 +21,4 @@ export default {
 </script>
 
 <style scoped>
-.search-bar {
-  position: absolute;
-  left: 50%;
-  top: 5em;
-  transform: translateX(-50%);
-  width: 25%;
-}
 </style>
