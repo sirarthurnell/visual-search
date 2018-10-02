@@ -2,12 +2,12 @@
   "name": "visual-search",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "set NODE_ENV=development && vue-cli-service serve",
+    "build": "set NODE_ENV=production && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "SET NODE_ENV=production && npm run build && electron app.js"
+    "electron": "npm run build && electron app.js"
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",

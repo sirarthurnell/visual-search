@@ -42,6 +42,7 @@ export default {
         console.log(rawImages);
         const urls = rawImages.body.items.map(item => item.media.m.replace('_m.', '_c.'));
         this.imageUrls = urls;
+        this.$emit('imagesLoaded', [].concat(this.imageUrls));
       });
     }
   },

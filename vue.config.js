@@ -1,10 +1,13 @@
 module.exports = {
-  // configureWebpack: config => {
-  //   if (process.env.NODE_ENV === 'production') {
-  //     config.output.publicPath = `${process.cwd()}/dist/`
-  //   }
-  // },
-  baseUrl: process.env.NODE_ENV === 'production'
-  ? '/'
-  : `${process.cwd()}/dist/`
+  baseUrl: getBaseUrl()
+}
+
+function getBaseUrl() {
+  const isProduction = process.env['NODE_ENV'].indexOf('production') > -1;
+
+  if(isProduction) {
+    return `${process.cwd()}/dist/`;
+  } else {
+    return '/';
+  }
 }

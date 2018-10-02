@@ -1,12 +1,14 @@
 <template>
   <div id="app" class="app">
+    <Background :imageUrl="backgroundImage" />
     <SearchBar class="search-bar-component" @searchRequested="onSearchRequested($event)" />
     <Info class="info-component" :topic="topic" />
-    <Images class="images-component" :topic="topic" />
+    <Images class="images-component" :topic="topic" @imagesLoaded="onImagesLoaded($event)" />
   </div>
 </template>
 
 <script>
+import Background from './components/Background';
 import SearchBar from './components/SearchBar.vue';
 import Info from './components/Info.vue';
 import Images from './components/Images.vue';
@@ -14,18 +16,23 @@ import Images from './components/Images.vue';
 export default {
   name: 'app',
   components: {
+    Background,
     SearchBar,
     Info,
     Images
   },
   data() {
     return {
-      topic: ''
+      topic: '',
+      backgroundImage: ''
     };
   },
   methods: {
     onSearchRequested(topic) {
       this.topic = topic;
+    },
+    onImagesLoaded(imageUrls) {
+      this.backgroundImage = imageUrls.shift();
     }
   }
 };
