@@ -39,7 +39,6 @@ export default {
     updateImages() {
       const images = new ImagesService();
       images.getImages(this.topic).then(rawImages => {
-        console.log(rawImages);
         const urls = rawImages.body.items.map(item => item.media.m.replace('_m.', '_c.'));
         this.imageUrls = urls;
         this.$emit('imagesLoaded', [].concat(this.imageUrls));

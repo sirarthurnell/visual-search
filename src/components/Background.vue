@@ -18,6 +18,7 @@ export default {
   height: 100%;
   background-size: cover;
   background-position: center center;
+  transition: background-image 1s ease-in-out;
   z-index: -1;
   position: fixed;
   top: 0; 
